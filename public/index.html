@@ -24,7 +24,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        $.getJSON('http://localhost:9000/lineage', function (data) {
+        $.getJSON('https://v5wv3yhbzl.execute-api.ap-southeast-1.amazonaws.com/nghiavt-producer', function (data) {
             // create an array with nodes
             var nodes = new vis.DataSet(data.vertices);
 
