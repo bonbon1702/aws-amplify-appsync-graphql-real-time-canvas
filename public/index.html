@@ -15,7 +15,12 @@
     </style>
 
 <body>
-    <p>Create a simple network with some nodes and edges.</p>
+    <p>Nghia</p>
+
+    <label>
+        Filter nodes
+        <input type="text" id="nodeFilterSelect" name="fname">
+    </label>
 
     <div id="mynetwork"></div>
 
@@ -26,8 +31,32 @@
     <script>
         $.getJSON('https://n9zjjpmsmg.execute-api.ap-southeast-1.amazonaws.com/test001', function (d) {
             // create an array with nodes
+            
             var data = $.parseJSON(d);
-            var nodes = new vis.DataSet(data.vertices);
+
+            let nodeFilterValue = "";
+
+            const nodeFilterSelector = document.getElementById("nodeFilterSelect");
+
+            nodeFilterSelector.addEventListener("change", (e) => {
+                // set new value to filter variable
+                nodeFilterValue = e.target.value;
+                /*
+                      refresh DataView,
+                      so that its filter function is re-calculated with the new variable
+                    */
+                nodes.refresh();
+            });
+
+            const nodesFilter = (node) => {
+                if (nodeFilterValue === "") {
+                    return true;
+                }
+                console.log(node);
+                return node.label.includes(nodeFilterValue)
+            };
+
+            var nodes = new vis.DataView(new vis.DataSet(data.vertices), { filter: nodesFilter });;
 
             // create an array with edges
             var edges = new vis.DataSet(data.edges);
