@@ -24,8 +24,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        $.getJSON('https://n9zjjpmsmg.execute-api.ap-southeast-1.amazonaws.com/test001', function (data) {
+        $.getJSON('https://n9zjjpmsmg.execute-api.ap-southeast-1.amazonaws.com/test001', function (d) {
             // create an array with nodes
+            var data = $.parseJSON(d);
             var nodes = new vis.DataSet(data.vertices);
 
             // create an array with edges
