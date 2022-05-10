@@ -8,21 +8,108 @@
 
     <style>
         #mynetwork {
-            width: 1200px;
+            width: 100%;
             height: 1200px;
             border: 1px solid lightgray;
         }
+
+        html,
+        body {
+            overflow-x: hidden;
+            /* Prevent scroll on narrow devices */
+        }
+
+        body {
+            padding-top: 56px;
+        }
+
+        @media (max-width: 991.98px) {
+            .offcanvas-collapse {
+                position: fixed;
+                top: 56px;
+                /* Height of navbar */
+                bottom: 0;
+                left: 100%;
+                width: 100%;
+                padding-right: 1rem;
+                padding-left: 1rem;
+                overflow-y: auto;
+                visibility: hidden;
+                background-color: #343a40;
+                transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+            }
+
+            .offcanvas-collapse.open {
+                visibility: visible;
+                transform: translateX(-100%);
+            }
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            color: rgba(255, 255, 255, .75);
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-underline .nav-link {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            font-size: .875rem;
+            color: #6c757d;
+        }
+
+        .nav-underline .nav-link:hover {
+            color: #007bff;
+        }
+
+        .nav-underline .active {
+            font-weight: 500;
+            color: #343a40;
+        }
+
+        .bg-purple {
+            background-color: #6f42c1;
+        }
     </style>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
 <body>
-    <p>Nghia</p>
+    <main class="container">
+        <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+            <img class="me-3" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo-white.svg" alt=""
+                width="48" height="38">
+            <div class="lh-1">
+                <h1 class="h6 mb-0 text-white lh-1">Data lineage</h1>
+            </div>
+        </div>
 
-    <label>
-        Filter nodes
-        <input type="text" id="nodeFilterSelect" name="fname">
-    </label>
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Filter</label>
+                <input type="text" class="form-control" id="nodeFilterSelect">
+            </div>
+            <div id="mynetwork"></div>
+        </div>
 
-    <div id="mynetwork"></div>
+
+    </main>
+
 
 
     <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -31,7 +118,7 @@
     <script>
         $.getJSON('https://n9zjjpmsmg.execute-api.ap-southeast-1.amazonaws.com/test001', function (d) {
             // create an array with nodes
-            
+
             var data = $.parseJSON(d);
 
             let nodeFilterValue = "";
@@ -77,6 +164,10 @@
 
     </script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 
